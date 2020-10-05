@@ -11,13 +11,21 @@ var todayHour = dayjs().format("YYYY, MM, DDT16:00:00.000Z")
 // ESTABLISH VARIABLES IN HTML //
 /////////////////////////////////
 
-// Linking to Elements in HTML //
+// Linking to Tags in HTML //
+var containerDiv = $(".containerDiv")
 var timeBlockDiv = $(".timeBlock");
 var divRowDiv = $(".row");
 var hourDiv = $(".hour");
 var textAreaDiv = $(".description");
 var saveButton = $(".saveBtn");
-var timeTag = $(".p")
+
+/////////////////////////////////
+// CREATING ELEMENTS
+/////////////////////////////////
+var pTag = $("<p>");
+var divEl = $("<div>");
+var textEl = $("<textarea>");
+var saveEl = $("<button>")
 
 //////////////////////
 // TIME BLOCK OBJECT //
@@ -32,7 +40,7 @@ timeBlockObject = {
 }
 
 //////////////////////
-// CREATE 24 HOURS //
+// GENERATE 24 HOURS //
 //////////////////////
 
 var allHours = [];
@@ -42,37 +50,72 @@ create24hours();
 
 function create24hours(){
     // Set Daily Hours and AM/PM Variables 
-    
+
         // Loop 24 Times
         for ( var i=0 ; i<24 ; i++ ){
     
+        //Determine AM or PM
+        var amPM;
+        if (i < 11){
+            amPM = "am";
+            } else if (i >= 12) {
+            amPM = "pm";
+            };
+        // Reset to 1 After 12
+        if (i > 11){
+            h = (i -12);
+            } else {
+            h = i;
+            }
+
         //Add Context to Each Time Stamp and Push to dailyHours Array
-        dailyHour = (i+1) + ":00 ";
+        dailyHour = (h+1) + ":00 " + amPM;
         console.log(dailyHour)
         allHours.push(dailyHour);
-        };
+         
+    };
         
+    generateTimeBlocks();
 };
 
 
 /////////////////////////////////
-// GENERATE 24 HOURS //
+// GENERATE 24 TIME BLOCKS //
 /////////////////////////////////
-
-allTimeBlocks = [];
-
-
 
 function generateTimeBlocks(){
-    for( var i=0 ; i<24; i++){
 
-    var newTimeBlockDiv
-        
+    //Loop Hour Array to Generate 24 Time Blocks
+    for (var i = 0; i < allHours.length ; i++){
+    
+    // NEW TIME BLOCK DIV
+    var newTimeBlock = $("<div>");
+    newTimeBlock.attr("class", "time-block");
+    containerDiv.append(newTimeBlock);
+
+    // NEW ROW DIV
+    var newRow = $("<div>");
+    newRow.attr("class", "row");
+    newTimeBlock.append(newRow);
+
+    // NEW HOUR DIV
+    var newHour = $("<div class='hour'>" + allHours[i] + "</div>");
+    console.log("Hours: " + newHour)
+    newRow.append(newHour);
+
+    // NEW TEXTAREA DIV
+    var newTextArea = $("<textarea>");
+    newTextArea.attr("class", "description")
+    newHour.append(newTextArea);
+    
+    // NEW BUTTON DIV
+    var newSave = $("<button>");
+    newSave.attr("class", "saveBtn");
+    newTextArea.append(newSave);
 
     };
+
 };
-
-
 
 
 
@@ -95,18 +138,7 @@ function generateTimeBlocks(){
 // };
 
 
-// Determine AM or PM
-        // if (i < 11){
-        //     amPM = "am";
-        //     } else if (i >= 12) {
-        //     amPM = "pm";
-        //     };
-        // // Reset to 1 After 12
-        // if (i > 11){
-        //     h = (i -12);
-        //     } else {
-        //     h = i;
-        //     }
+
 
 
 
@@ -117,25 +149,6 @@ function generateTimeBlocks(){
 // Create a Render Function that Rerenders the Timeblocks whenever it's saved.
 // Create a function for Before-and-After Color Functions Based on the DayJS and Object
 
-
-
-
-
-
-var allTimeBlocks = {
-    hour1: "",
-    hour2: "",
-    hour3: "",
-    hour4: "",
-    hour5: "",
-    hour6: "",
-    hour7: "",
-    hour8: "",
-    hour9: "",
-    hour10: "",
-    hour11: "",
-    hour12: "",
-}
 
 
 // Generate 24 Time Blocks
