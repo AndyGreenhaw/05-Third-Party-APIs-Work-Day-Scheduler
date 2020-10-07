@@ -26,7 +26,7 @@ textarea{
 }
 
 .description{
-  white-space: pre-wrap;
+  /* white-space: pre-wrap; */
   /* Andy Edit */
   width:84%;
 }
