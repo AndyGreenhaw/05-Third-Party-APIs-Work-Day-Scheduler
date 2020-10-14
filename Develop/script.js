@@ -79,7 +79,6 @@ function generateTimeBlocks(){
             // Drop an ID for Color Coding Later
             newTimeBlock.attr("id", (i+9) + "idBlock");
         
-
         // NEW ROW DIV
         newRow = $("<div>");
         newRow.attr("class", "row");
