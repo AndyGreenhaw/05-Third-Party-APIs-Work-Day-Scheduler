@@ -33,21 +33,21 @@ createWorkHours();
 function createWorkHours(){
 
     // Loop 9 Times for 9 Work Hours
-    for ( var i=0 ; i<9 ; i = i+1 ){
+    for ( var i=0 ; i<24 ; i = i+1 ){
 
     //Determine AM or PM
     var amPM;
-    if ((i+8) < 11){
+    if ((i) < 11){
         amPM = " AM";
         } else if ((i+8) >= 12) {
         amPM = " PM";
     };
     
     // Reset to 1 After 12
-    if ((i+8) > 11){
-        h = ((i+8) -12);
+    if ((i) > 11){
+        h = ((i) -12);
         } else {
-        h = (i+8);
+        h = (i);
     }
 
     //Add Context to Each Time Stamp and Push to dailyHours Array
@@ -77,7 +77,7 @@ function generateTimeBlocks(){
         newTimeBlock.attr("class", "time-block");
         containerDiv.append(newTimeBlock);    
             // Drop an ID for Color Coding Later
-            newTimeBlock.attr("id", (i+9) + "idBlock");
+            newTimeBlock.attr("id", (i) + "idBlock");
         
         // NEW ROW DIV
         newRow = $("<div>");
@@ -94,7 +94,7 @@ function generateTimeBlocks(){
         newTextArea.attr("class", "description");
         newHour.after(newTextArea);
             // Drop an ID to Collect Click
-            newTextArea.attr("id", (i+9) + "id");
+            newTextArea.attr("id", (i) + "id");
         
         
         // NEW SAVE BUTTON 
@@ -103,7 +103,7 @@ function generateTimeBlocks(){
         newSave.text("S");
         newTextArea.after(newSave);
             // Drop Data to use for LocalStorage ID
-            newSave.attr("data-idx", (i+9));
+            newSave.attr("data-idx", (i));
 
     };    
 
@@ -129,6 +129,8 @@ function generateTimeBlocks(){
             $(".saveBtn").on("click", function(e){
             e.preventDefault();
 
+
+            console.log("read")
             // Collect Save Key from Click
             var saveClick = e.target.getAttribute("data-idx");
 
@@ -142,6 +144,8 @@ function generateTimeBlocks(){
                     console.log("VALUE: " + textInput);
                     console.log("KEY: " + saveClick);
 
+                    localStorage.setItem(saveClick, textInput)
+
                 };
             });
         });
@@ -149,7 +153,15 @@ function generateTimeBlocks(){
 //////////////////////////////////////////////////
 // GET DATA FROM STORAGE TO PLACE IN TEXT BOXES //
 //////////////////////////////////////////////////
-
+    $("#0id").val(localStorage.getItem(0));
+    $("#1id").val(localStorage.getItem(1));
+    $("#2id").val(localStorage.getItem(2));
+    $("#3id").val(localStorage.getItem(3));
+    $("#4id").val(localStorage.getItem(4));
+    $("#5id").val(localStorage.getItem(5));
+    $("#6id").val(localStorage.getItem(6));
+    $("#7id").val(localStorage.getItem(7));
+    $("#8id").val(localStorage.getItem(8));
     $("#9id").val(localStorage.getItem(9));
     $("#10id").val(localStorage.getItem(10));
     $("#11id").val(localStorage.getItem(11));
@@ -159,6 +171,13 @@ function generateTimeBlocks(){
     $("#15id").val(localStorage.getItem(15));
     $("#16id").val(localStorage.getItem(16));
     $("#17id").val(localStorage.getItem(17));
+    $("#18id").val(localStorage.getItem(18));
+    $("#19id").val(localStorage.getItem(19));
+    $("#20id").val(localStorage.getItem(20));
+    $("#21id").val(localStorage.getItem(21));
+    $("#22id").val(localStorage.getItem(22));
+    $("#23id").val(localStorage.getItem(23));
+    $("#24id").val(localStorage.getItem(24));
 
 ////////////////////////////////////////
 // RENDER JS TIME CODES TO MATCH CODE //
@@ -172,20 +191,20 @@ function generateTimeBlocks(){
         var currentHour = parseInt(dayjs().format('H'));
 
         // Loop Current Hour Against ID Blocks
-        for( var i=0; i<9; i++){
+        for( var i=0; i<24; i++){
             
             // Apply Green to Future
-            if( (i+9) > currentHour){                          
-                $(`#${i+9}idBlock`).addClass("future");
+            if( (i) > (currentHour)){                          
+                $(`#${i}idBlock`).addClass("future");
             
             // Apply Grey to Past
-            } else if ((i+9) < currentHour){ 
-                $(`#${i+9}idBlock`).addClass("past");
+            } else if ((i) < (currentHour)){ 
+                $(`#${i}idBlock`).addClass("past");
             
             // Apply Red to Present
-            } else if ((i+9) === currentHour){        
+            } else if ((i) === (currentHour)){        
                 console.log("present", i)                             
-                $(`#${i+9}idBlock`).addClass("present");
+                $(`#${i}idBlock`).addClass("present");
             };
         };
     };
