@@ -2,7 +2,7 @@
 // ESTABLISH CURRENT DAY //
 ///////////////////////////
 
-$("#currentDay").text(moment().format("dddd, MMMM Do YYYY"));
+$("#currentDay").text(moment().format("dddd, MMMM DD YYYY"));
 
 ///////////////////////////////
 // ESTABLISH GLOBAL ELEMENTS //
@@ -100,7 +100,7 @@ function generateTimeBlocks(){
         // NEW SAVE BUTTON 
         newSave = $("<button>");
         newSave.attr("class", "saveBtn");
-        newSave.text("S");
+        newSave.text("Save");
         newTextArea.after(newSave);
             // Drop Data to use for LocalStorage ID
             newSave.attr("data-idx", (i));
