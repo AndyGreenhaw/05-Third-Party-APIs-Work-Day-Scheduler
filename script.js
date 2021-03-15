@@ -32,15 +32,19 @@ createWorkHours();
 // Establish Daily Hour Variables with Correct AM/PM
 function createWorkHours(){
 
-    // Loop 9 Times for 9 Work Hours
+    // Loop 24 Times for 24 Work Hours
     for ( var i=0 ; i<24 ; i = i+1 ){
 
     //Determine AM or PM
+    
     var amPM;
     if ((i) < 11){
         amPM = " AM";
-        } else if ((i+8) >= 12) {
+        } else if ((i) >= 11 && (i) < 23) {
         amPM = " PM";
+        // } else if ((i) > 23) {
+        } else {
+        amPM = " AM";
     };
     
     // Reset to 1 After 12
@@ -53,7 +57,9 @@ function createWorkHours(){
     //Add Context to Each Time Stamp and Push to dailyHours Array
     dailyHour = (h+1) + amPM;
     allHours.push(dailyHour);
-         
+
+    allHours.splice(0, 0, allHours.pop())
+
     };
         
     generateTimeBlocks();
