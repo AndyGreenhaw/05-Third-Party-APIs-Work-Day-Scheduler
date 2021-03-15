@@ -2,7 +2,7 @@
 // ESTABLISH CURRENT DAY //
 ///////////////////////////
 
-$("#currentDay").text(moment().format("dddd, MMMM DD YYYY"));
+$("#currentDay").text(moment().format("dddd, MMMM DD, YYYY"));
 
 ///////////////////////////////
 // ESTABLISH GLOBAL ELEMENTS //
