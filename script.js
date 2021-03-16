@@ -2,7 +2,7 @@
 // ESTABLISH CURRENT DAY //
 ///////////////////////////
 
-$("#currentDay").text(moment().format("dddd     -     MMMM DD     -     YYYY"));
+$("#currentDay").text(moment().format("dddd     -     MMMM DD, YYYY"));
 
 ///////////////////////////////
 // ESTABLISH GLOBAL ELEMENTS //
@@ -38,9 +38,9 @@ function createWorkHours(){
     //Determine AM or PM
     
     var amPM;
-    if ((i) < 11){
+    if ((i) <= 11){
         amPM = " AM";
-        } else if ((i) >= 11 && (i) < 23) {
+        } else if ((i) > 11 && (i) < 24) {
         amPM = " PM";
         // } else if ((i) > 23) {
         } else {
@@ -48,17 +48,21 @@ function createWorkHours(){
     };
     
     // Reset to 1 After 12
-    if ((i) > 11){
-        h = ((i) -12);
-        } else {
+    if ((i) === 0){
+        h = 12
+    } else if ((i) < 13 && (i) > 0){
         h = (i);
+        // } else if ((i) = 12){
+        // h = 12
+    } else if ((i) >= 13){
+        h = ((i) - 12);
     }
 
     //Add Context to Each Time Stamp and Push to dailyHours Array
-    dailyHour = (h+1) + amPM;
+    dailyHour = (h) + amPM;
     allHours.push(dailyHour);
 
-    allHours.splice(0, 0, allHours.pop())
+    // allHours.splice(0, 0, allHours.pop())
 
     };
         
@@ -200,15 +204,15 @@ function generateTimeBlocks(){
         for( var i=0; i<24; i++){
             
             // Apply Green to Future
-            if( (i) > (currentHour)){                          
+            if( (i+1) > (currentHour)){                          
                 $(`#${i}idBlock`).addClass("future");
             
             // Apply Grey to Past
-            } else if ((i) < (currentHour)){ 
+            } else if ((i+1) < (currentHour)){ 
                 $(`#${i}idBlock`).addClass("past");
             
             // Apply Red to Present
-            } else if ((i) === (currentHour)){        
+            } else if ((i+1) === (currentHour)){        
                 console.log("present", i)                             
                 $(`#${i}idBlock`).addClass("present");
             };
